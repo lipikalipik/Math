@@ -1,0 +1,24 @@
+3)delete from account
+where branch_name in(
+select branch_name
+from branch where branch_city='delhi');
+
+1)
+select distinct d.Customer_name,count(*)
+from Account a,Depositor d
+where d.acc_no=a.acc_no and d.acc_no in(select acc_no from Account where branch_name='Jaynagar')
+group by d.customer_name
+having count(*)>=2;
+
+
+2)
+select d.customer_name
+from depositor d
+join account A on A.acc_no=d.acc_no
+join Branch B on B.branch_name=A.branch_name
+where B.branch_city='Bangalore'
+group by d.Customer_name
+having count( distinct A.branch_name)=(select count(distinct branch_name) 
+from branch
+ where branch_city='bangalore');
+
